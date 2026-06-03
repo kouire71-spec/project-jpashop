@@ -38,14 +38,18 @@ public class OrderController {
     public String order(@RequestParam("memberId") Long memberId,
                         @RequestParam("itemId") Long itemId,
                         @RequestParam("count") int count) {
+
         orderService.order(memberId, itemId, count);
 
         return "redirect:/orders";
     }
 
     @GetMapping("/orders")
+//    @ModelAttribute 요청 파라미터를 객체로 바인딩해주는 어노테이션, 최초 리스트 접근 시 빈 객체 반환
     public String orderList(@ModelAttribute("orderSearch")OrderSearch orderSearch, Model model) {
+
         List<Order> orders = orderService.findOrders(orderSearch);
+
         model.addAttribute("orders", orders);
 
         return "order/orderList";
@@ -53,7 +57,9 @@ public class OrderController {
 
     @PostMapping("/orders/{orderId}/cancel")
     public String cancelOrder(@PathVariable("orderId") Long orderId) {
+
         orderService.cancelOrder(orderId);
+
         return "redirect:/orders";
     }
 }

@@ -6,6 +6,7 @@
     <div th:replace="~{fragments/bodyHeader :: bodyHeader}"/>
     <div>
         <div>
+            <!-- form의 action이 없으면 현재 URL로 요청 보냄 -->
             <form th:object="${orderSearch}" class="form-inline">
                 <div class="form-group mb-2">
                     <input type="text" th:field="*{memberName}" class="form-control" placeholder="회원명"/>
@@ -56,6 +57,7 @@
 </div> <!-- /container -->
 
 </body>
+<!-- POST 요청 보내기 위해 form을 JS로 만들어서 제출 -->
 <script>
     function cancel(id) {
     var form = document.createElement("form");

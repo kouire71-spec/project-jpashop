@@ -19,34 +19,36 @@ public class OrderItem {
     private Long id;
 
     @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "item_id")
-    private Item item;
-
-    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "order_id")
     private Order order;
 
-    private int orderPrice; //주문 가격
-    private int count; //주문 수량
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "item_id")
+    private Item item;
 
-    //==생성 메서드==//
+    private int orderPrice;
+    private int count;
+
+//    생성 메서드
     public static OrderItem createOrderItem(Item item, int orderPrice, int count) {
         OrderItem orderItem = new OrderItem();
         orderItem.setItem(item);
         orderItem.setOrderPrice(orderPrice);
         orderItem.setCount(count);
 
-        item.removeStock(count);
+        item.removeStock(count);    // 상품 개수 만큼 상품 재고 차감
         return orderItem;
     }
 
-    //==비즈니스 로직==//
+//    비즈니스 로직
     public void cancel() {
-        getItem().addStock(count);
+
+        getItem().addStock(count);  // 주문 취소 시 상품 재고 증가
     }
 
-    //==조회 로직==//
+//    조회 로직
     public int getTotalPrice() {
+
         return getOrderPrice() * getCount();
     }
 }

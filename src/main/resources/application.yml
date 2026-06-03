@@ -7,13 +7,13 @@ spring:  #띄어쓰기 없음
 
   jpa: #띄어쓰기 2칸
     hibernate:  #띄어쓰기 4칸
-      ddl-auto: create
+      ddl-auto: none
     properties:  #띄어쓰기 4칸
       hibernate:  #띄어쓰기 6칸
 #        show_sql: true
-        format_sql: true
+        format_sql: true                # sql 줄바꿈 설정
 
 logging:  #띄어쓰기 없음
   level:  #띄어쓰기 2칸
-    org.hibernate.SQL: debug
-    org.hibernate.orm.jdbc.bind: trace
+    org.hibernate.SQL: debug            # 실행되는 sql 출력
+    org.hibernate.orm.jdbc.bind: trace  # 실제 값 출력

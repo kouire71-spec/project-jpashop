@@ -14,18 +14,21 @@ public class ItemRepository {
     private final EntityManager em;
 
     public void save(Item item) {
+
         if (item.getId() == null) {
             em.persist(item);
         } else {
-            em.merge(item);
+            em.merge(item);     // 준영속 객체를 복사해서 새로운 영속 객체를 만드는 것
         }
     }
 
     public Item findOne(Long id) {
+
         return em.find(Item.class, id);
     }
 
     public List<Item> findAll() {
+
         return em.createQuery("select i from Item i", Item.class)
                 .getResultList();
     }
